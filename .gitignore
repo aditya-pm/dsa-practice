@@ -1,0 +1,16 @@
+# macOS junk
+.DS_Store
+
+# build / binary output
+.bin/
+
+# editor config
+.vscode/
+
+# python cache (ignore everywhere)
+__pycache__/
+*.pyc
+*.pyo
+
+# throwaway / experiments
+test/

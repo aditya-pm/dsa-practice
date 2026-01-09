@@ -1,8 +1,5 @@
 #include <cmath>
-#include <cstdlib>
 #include <iostream>
-#include <string>
-#include <unordered_map>
 
 bool is_one_edit_away(const std::string& s1, const std::string& s2) {
     int len1 = s1.size();

@@ -23,11 +23,11 @@ bool is_one_edit_away(const std::string& s1, const std::string& s2) {
 
             used_edit = true;
 
-            // if same length → replacement
+            // if same length then replacement case (both pointer increase)
             if (shorter.size() == longer.size()) {
                 i++;
             }
-            // if different length → insertion/deletion
+            // if different length  insertion/deletion case (only longer pointer increase)
             j++;
         }
     }

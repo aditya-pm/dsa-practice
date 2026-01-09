@@ -31,4 +31,16 @@ bool is_permutation_palindrome(std::string str) {
 
 // For any permutation of a string to form a palindrome:
 // - All characters must have even frequency
-// - At most one character may have an odd frequency (the middle character in odd-length palindromes)
+// - At most one character may have an odd frequency
+// - An odd-frequency character is required only if the total number of characters is odd
+//
+// Examples:
+// "aabb"        → true   (all counts even)
+// "aaa"         → true   (one odd count: a=3)
+// "aabbc"       → true   (one odd count: c=1)
+// "aaabaaa"     → true   (one odd count: a=7)
+// "aabbcd"      → false  (two odd counts: c=1, d=1)
+//
+// So:
+// - If the string length is even → zero odd-count characters
+// - If the string length is odd → exactly one odd-count character

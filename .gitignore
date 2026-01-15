@@ -6,6 +6,7 @@
 
 # editor config
 .vscode/
+main.code-workspace
 
 # python cache (ignore everywhere)
 __pycache__/

@@ -23,29 +23,37 @@ void zero_matrix(std::vector<std::vector<int>>& mat) {
 }
 
 /*
-INCORRECT SOLUTION (demonstrates a common pitfall)
+INCORRECT SOLUTION (illustrates marker overlap issue)
 
 Idea:
-    Use the first column and first row of the matrix as in-place markers:
-    - mat[i][0] == 0  → row i should be zeroed
-    - mat[0][j] == 0  → column j should be zeroed
+    Use the first row and first column as in-place markers:
+    - mat[i][0] == 0  ⇒ row i should be zeroed
+    - mat[0][j] == 0  ⇒ column j should be zeroed
 
-This idea itself is correct and is the basis of the optimal O(1) space solution.
+This idea is fundamentally correct and is used in the optimal O(1) space solution.
 
-Why the implementation is incorrect:
-    The first row and first column are used both as:
-        (1) normal data
+Why this implementation is incorrect:
+    The problem arises specifically for the first row and the first column.
+    They serve two roles simultaneously:
+        (1) normal matrix data
         (2) marker storage
 
-    However, the algorithm does NOT preserve whether the first row or first
-    column originally contained a zero. Once they are overwritten as markers,
-    their original state is lost, and the program can no longer distinguish:
-        - cells that were originally zero
-        - cells that were set to zero later as markers
+    For all i > 0 and j > 0, the markers are unambiguous:
+        - mat[i][0] refers only to row i
+        - mat[0][j] refers only to column j
 
-    This causes incorrect propagation of zeros.
+    However, for index 0 there is an overlap:
+        - mat[0][0] belongs to both the first row and the first column
 
-Concrete example illustrating the failure:
+    Once mat[0][0] is set to zero as a marker, the algorithm cannot distinguish:
+        - whether row 0 should be zeroed,
+        - whether column 0 should be zeroed,
+        - or whether both were originally required to be zeroed.
+
+    This ambiguity exists only for the first row and first column; all other
+    rows and columns do not suffer from this overlap.
+
+Example demonstrating the failure:
 
 Input:
     1  0  3
@@ -57,46 +65,31 @@ Expected output:
     4  0  6
     7  0  9
 
-Execution (first pass — marking phase):
+Execution:
     Encounter mat[0][1] == 0
     → mark row 0 and column 1:
         mat[0][0] = 0
         mat[0][1] = 0
 
-Matrix becomes:
-    0  0  3
-    4  5  6
-    7  8  9
+    mat[0][0] is now zero, but it is unclear whether this indicates:
+        - row 0 should be zeroed,
+        - column 0 should be zeroed,
+        - or both.
 
-Critical loss of information:
-    mat[0][0] is now zero, but the algorithm does not know whether:
-        - it was originally zero, or
-        - it was set to zero as a marker
+    During the zeroing pass, this ambiguity causes both the entire first row
+    and the entire first column to be zeroed, producing an incorrect result.
 
-Execution (second pass — zeroing phase):
-    For row 0:
-        mat[0][0] == 0 → condition is true for all columns
-        → entire row 0 is zeroed
-
-    For column 0:
-        mat[0][0] == 0 → condition is true for all rows
-        → entire column 0 is zeroed
-
-Final (incorrect) matrix:
-    0  0  0
-    0  0  6
-    0  0  9
-
-Root cause (core bug):
-    The algorithm overwrites the first row and first column without first
-    recording whether they originally needed to be zeroed. This violates
-    a key invariant of in-place marking algorithms:
-        "Marker memory must not destroy information that is still needed later."
+Root cause:
+    Marker overlap at mat[0][0] makes the zeroing intent for the first row
+    and first column indistinguishable.
 
 Correct approach:
-    Before using the first row and column as markers, store their original
-    zero-state separately (e.g., using two boolean variables).
+    Handle the first row and first column explicitly by recording, before
+    marking, whether they originally contain any zeros (e.g., using two
+    boolean flags). All other rows and columns can safely use the first row
+    and column as markers because no overlap exists for i > 0 and j > 0.
 */
+
 void zero_matrix_incorrect(std::vector<std::vector<int>>& mat) {
     for (int i = 0; i < mat.size(); i++) {
         for (int j = 0; j < mat[i].size(); j++) {

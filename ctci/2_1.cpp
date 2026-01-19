@@ -29,13 +29,38 @@ void remove_dupes_buffer(ListNode* head) {
     }
 }
 
+// no extra space
 void remove_dupes(ListNode* head) {
+    if (head == nullptr || head->next == nullptr) return;
+
+    ListNode* curr = head;
+    while (curr->next != nullptr) {
+        ListNode* runner = curr->next;
+        ListNode* runner_prev = curr;
+        while (runner != nullptr) {
+            if (curr->val == runner->val) {
+                ListNode* temp = runner;
+                runner_prev->next = runner->next;
+                runner = runner->next;
+                delete temp;
+            } else {
+                runner = runner->next;
+                runner_prev = runner_prev->next;
+            }
+        }
+        curr = curr->next;
+    }
 }
 
 int main() {
-    createNode(10, &head);
-    createNode(20, &head);
-    createNode(30, &head);
+    createNode(1, &head);
+    createNode(2, &head);
+    createNode(2, &head);
+    createNode(2, &head);
+    createNode(3, &head);
     printList(head);
+    remove_dupes(head);
+    printList(head);
+
     return 0;
 }

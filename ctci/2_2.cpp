@@ -23,6 +23,26 @@ ListNode* kth_last(ListNode* head, int k) {
     return slow;
 }
 
+int helper(ListNode* node, int k, ListNode*& result) {
+    if (node == nullptr) return 0;
+
+    int pos_from_last = helper(node->next, k, result) + 1;
+
+    if (pos_from_last == k) {
+        result = node;
+    }
+
+    return pos_from_last;
+}
+
+ListNode* kth_last_recursive(ListNode* head, int k) {
+    if (head == nullptr || k <= 0) return nullptr;
+
+    ListNode* result = nullptr;
+    helper(head, k, result);
+    return result;
+}
+
 int main() {
     createNode(1, &head);
     createNode(2, &head);
@@ -32,6 +52,7 @@ int main() {
     printList(head);
 
     std::cout << kth_last(head, 2)->val << std::endl;
+    std::cout << kth_last_recursive(head, 2)->val << std::endl;
 
     return 0;
 }

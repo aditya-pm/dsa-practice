@@ -12,7 +12,7 @@ struct ListNode {
 ListNode* head = nullptr;
 ListNode* tail = nullptr;
 
-ListNode* createNode(int value) {
+ListNode* append_node(int value) {
     ListNode* newNode = new ListNode(value);
     if (head == nullptr) {
         head = newNode;
@@ -24,7 +24,7 @@ ListNode* createNode(int value) {
     return newNode;
 }
 
-void printList() {
+void print_list() {
     ListNode* temp = head;
     while (temp != nullptr) {
         std::cout << temp->val << "->";
@@ -50,12 +50,12 @@ void reverseList() {
 }
 
 int main() {
-    createNode(10);
-    createNode(20);
-    createNode(30);
-    printList();
+    append_node(10);
+    append_node(20);
+    append_node(30);
+    print_list();
     reverseList();
-    printList();
+    print_list();
 
     return 0;
 }

@@ -1,9 +1,6 @@
 // 19. Remove Nth Node From End of List
 #include "LinkedList.h"
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 class Solution {
    public:
     // double pass
@@ -56,6 +53,9 @@ class Solution {
 };
 
 int main() {
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
     Solution sol;
 
     // case 1: 1->2->3->4->5->nullptr, n = 2
@@ -65,24 +65,24 @@ int main() {
     ListNode n2(2, &n3);
     ListNode n1(1, &n2);
     std::cout << "case 1:\n";
-    printList(&n1);
+    print_list(&n1);
     ListNode* newHead = sol.removeNthFromEnd(&n1, 2);
-    printList(newHead);
+    print_list(newHead);
 
     // case 2: 1 -> nullptr, n = 1
     n1 = ListNode(1);
     std::cout << "\ncase 2:\n";
-    printList(&n1);
+    print_list(&n1);
     newHead = sol.removeNthFromEnd(&n1, 1);
-    printList(newHead);
+    print_list(newHead);
 
     // case 3: 1 -> 2 -> nullptr, n = 1
     n2 = ListNode(2);
     n1 = ListNode(1, &n2);
     std::cout << "\ncase 3:\n";
-    printList(&n1);
+    print_list(&n1);
     newHead = sol.removeNthFromEnd(&n1, 1);
-    printList(newHead);
+    print_list(newHead);
 
     return 0;
 }

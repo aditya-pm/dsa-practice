@@ -3,9 +3,6 @@
 
 #include "LinkedList.h"
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 int nodeCount(ListNode* head) {
     int count = 0;
     ListNode* temp = head;
@@ -46,10 +43,13 @@ ListNode* middleNode2(ListNode* head) {
 }
 
 int main() {
-    createNode(10, &head);
-    createNode(20, &head);
-    createNode(30, &head);
-    printList(head);
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
+    append_node(10, &head, &tail);
+    append_node(20, &head, &tail);
+    append_node(30, &head, &tail);
+    print_list(head);
 
     std::cout << middleNode(head)->val << std::endl;
     std::cout << middleNode2(head)->val << std::endl;

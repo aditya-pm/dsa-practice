@@ -6,10 +6,7 @@
 #include "LinkedList.h"
 using namespace std;
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
-ListNode* modifiedList(vector<int>& nums) {
+ListNode* modifiedList(ListNode* head, vector<int>& nums) {
     unordered_set<int> set(nums.begin(), nums.end());
 
     ListNode dummy(0);
@@ -27,17 +24,21 @@ ListNode* modifiedList(vector<int>& nums) {
 }
 
 int main() {
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
     vector<int> nums = {1, 2, 3};
-    createNode(1, &head);
-    createNode(2, &head);
-    createNode(3, &head);
-    createNode(4, &head);
-    createNode(5, &head);
-    printList(head);
 
-    head = modifiedList(nums);
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(3, &head, &tail);
+    append_node(4, &head, &tail);
+    append_node(5, &head, &tail);
+    print_list(head);
 
-    printList(head);
+    head = modifiedList(head, nums);
+
+    print_list(head);
 
     return 0;
 }

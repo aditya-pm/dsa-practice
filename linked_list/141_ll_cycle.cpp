@@ -3,9 +3,6 @@
 
 #include "LinkedList.h"
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 bool hasCycle(ListNode* head) {
     // Floyd's cycle detection algorithm
     // also called Tortoise and Hare algorithm
@@ -29,15 +26,18 @@ bool hasCycle(ListNode* head) {
 }
 
 int main() {
-    createNode(10, &head);
-    ListNode* n2 = createNode(20, &head);
-    createNode(30, &head);
-    printList(head);
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
+    append_node(10, &head, &tail);
+    ListNode* n2 = append_node(20, &head, &tail);
+    append_node(30, &head, &tail);
+    print_list(head);
 
     std::cout << hasCycle(head) << std::endl;
 
     // creating a cycle
-    ListNode* n4 = createNode(40, &head);
+    ListNode* n4 = append_node(40, &head, &tail);
     n4->next = n2;
     std::cout << hasCycle(head) << std::endl;
 

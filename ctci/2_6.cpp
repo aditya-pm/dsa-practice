@@ -1,8 +1,5 @@
 #include "LinkedList.h"
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 bool is_palindrome(ListNode* head) {
     if (head == nullptr || head->next == nullptr) return true;
 
@@ -39,12 +36,14 @@ bool is_palindrome(ListNode* head) {
 }
 
 int main() {
-    createNode(1, &head);
-    createNode(2, &head);
-    // createNode(3, &head);
-    createNode(2, &head);
-    createNode(1, &head);
-    createNode(2, &head);
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
 
     std::cout << is_palindrome(head) << std::endl;
 

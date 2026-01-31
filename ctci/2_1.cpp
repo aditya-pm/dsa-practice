@@ -2,9 +2,6 @@
 
 #include "LinkedList.h"
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 // buffer allowed solution
 void remove_dupes_buffer(ListNode* head) {
     if (head == nullptr || head->next == nullptr) return;
@@ -53,14 +50,18 @@ void remove_dupes(ListNode* head) {
 }
 
 int main() {
-    createNode(1, &head);
-    createNode(2, &head);
-    createNode(2, &head);
-    createNode(2, &head);
-    createNode(3, &head);
-    printList(head);
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(3, &head, &tail);
+
+    print_list(head);
     remove_dupes(head);
-    printList(head);
+    print_list(head);
 
     return 0;
 }

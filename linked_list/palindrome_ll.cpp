@@ -58,12 +58,12 @@ bool isPalindrome2(ListNode* head) {
 }
 
 int main() {
-    createNode(1, &head);
-    createNode(2, &head);
-    createNode(2, &head);
-    createNode(1, &head);
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(1, &head, &tail);
 
-    printList(head);
+    print_list(head);
     std::cout << isPalindrome(head) << std::endl;
 
     return 0;

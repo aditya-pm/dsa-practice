@@ -1,8 +1,5 @@
 #include <LinkedList.h>
 
-ListNode* head = nullptr;
-ListNode* tail = nullptr;
-
 // k = 1 (last node), k = 2 (2nd last node)
 ListNode* kth_last(ListNode* head, int k) {
     if (head == nullptr || k <= 0) return nullptr;
@@ -44,12 +41,16 @@ ListNode* kth_last_recursive(ListNode* head, int k) {
 }
 
 int main() {
-    createNode(1, &head);
-    createNode(2, &head);
-    createNode(3, &head);
-    createNode(4, &head);
-    createNode(5, &head);
-    printList(head);
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+
+    append_node(1, &head, &tail);
+    append_node(2, &head, &tail);
+    append_node(3, &head, &tail);
+    append_node(4, &head, &tail);
+    append_node(5, &head, &tail);
+
+    print_list(head);
 
     std::cout << kth_last(head, 2)->val << std::endl;
     std::cout << kth_last_recursive(head, 2)->val << std::endl;

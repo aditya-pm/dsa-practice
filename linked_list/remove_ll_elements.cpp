@@ -12,7 +12,7 @@ struct ListNode {
 ListNode* head = nullptr;
 ListNode* tail = nullptr;
 
-ListNode* createNode(int value) {
+ListNode* append_node(int value) {
     ListNode* newNode = new ListNode(value);
     if (head == nullptr) {
         head = newNode;
@@ -24,7 +24,7 @@ ListNode* createNode(int value) {
     return newNode;
 }
 
-void printList() {
+void print_list() {
     ListNode* temp = head;
     while (temp != nullptr) {
         cout << temp->val << "->";
@@ -68,18 +68,18 @@ ListNode* removeElements2(int value) {
 }
 
 int main() {
-    createNode(1);
-    createNode(1);
-    createNode(2);
-    createNode(6);
-    createNode(3);
-    createNode(4);
-    createNode(5);
-    createNode(6);
-    printList();
+    append_node(1);
+    append_node(1);
+    append_node(2);
+    append_node(6);
+    append_node(3);
+    append_node(4);
+    append_node(5);
+    append_node(6);
+    print_list();
 
     removeElements(1);
-    printList();
+    print_list();
 
     return 0;
 }

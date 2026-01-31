@@ -9,22 +9,19 @@ struct ListNode {
     ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
-extern ListNode* head;
-extern ListNode* tail;
-
-ListNode* createNode(int value, ListNode** head) {
+ListNode* append_node(int value, ListNode** head, ListNode** tail) {
     ListNode* newNode = new ListNode(value);
     if (*head == nullptr) {
         *head = newNode;
-        tail = newNode;
+        *tail = newNode;
     } else {
-        tail->next = newNode;
-        tail = newNode;
+        (*tail)->next = newNode;
+        *tail = newNode;
     }
     return newNode;
 }
 
-void printList(ListNode* head) {
+void print_list(ListNode* head) {
     ListNode* temp = head;
     while (temp != nullptr) {
         std::cout << temp->val << "->";

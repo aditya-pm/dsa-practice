@@ -15,3 +15,6 @@ __pycache__/
 
 # throwaway / experiments
 test/
+
+# input/output files for CF
+input_output/

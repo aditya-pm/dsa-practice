@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stack>
 
+// Solution 1: Use 2 stacks
 class MinStackInt {
    private:
     std::stack<int> min_st;
@@ -38,6 +39,7 @@ class MinStackInt {
     }
 };
 
+// Solution 2: Using single stack but modified stack node
 struct StackNode {
     int val;
     int min_so_far;

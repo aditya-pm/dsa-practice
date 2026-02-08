@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <stack>
 
@@ -31,6 +32,49 @@ class MinStackInt {
         std::stack<int> st_copy = st;
         while (!st_copy.empty()) {
             std::cout << st_copy.top() << " ";
+            st_copy.pop();
+        }
+        std::cout << std::endl;
+    }
+};
+
+struct StackNode {
+    int val;
+    int min_so_far;
+};
+
+class MinStackInt2 {
+   private:
+    std::stack<StackNode> st;
+
+   public:
+    int top() {
+        return st.top().val;
+    }
+
+    void push(int x) {
+        StackNode node;
+
+        node.min_so_far = st.empty()
+                              ? x
+                              : std::min(x, st.top().min_so_far);
+
+        node.val = x;
+        st.push(node);
+    }
+
+    void pop() {
+        st.pop();
+    }
+
+    int min_val() {
+        return st.top().min_so_far;
+    }
+
+    void traverse() {
+        std::stack<StackNode> st_copy = st;
+        while (!st_copy.empty()) {
+            std::cout << st_copy.top().val << " ";
             st_copy.pop();
         }
         std::cout << std::endl;

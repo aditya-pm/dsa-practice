@@ -5,14 +5,15 @@ void binary_search(int target, int* arr, int n) {
     int right = n - 1;
 
     while (left <= right) {
-        int mid = (left + right) / 2;
-        if (arr[mid] == target) {
+        // int mid = (left + right) / 2;
+        int mid = left + (right - left) / 2;
+        if (target == arr[mid]) {
             printf("Element found at index %d\n", mid);
             return;
-        } else if (arr[mid] > target) {
-            right = mid - 1;
-        } else {
+        } else if (target > arr[mid]) {
             left = mid + 1;
+        } else {
+            right = mid - 1;
         }
     }
 
@@ -25,14 +26,15 @@ void binary_search_recursive(int target, int* arr, int left, int right) {
         return;
     }
 
-    int mid = (left + right) / 2;
+    // int mid = (left + right) / 2;
+    int mid = left + (right - left) / 2;
 
     if (target == arr[mid]) {
         printf("Element found at index %d\n", mid);
         return;
     } else if (target > arr[mid]) {
         binary_search_recursive(target, arr, mid + 1, right);
-    } else if (target < arr[mid]) {
+    } else {
         binary_search_recursive(target, arr, left, mid - 1);
     }
 }

@@ -4,15 +4,17 @@
 
 int partition(std::vector<int>& arr, int start, int end) {
     int pivot = arr[end];
-    int partition_index = start;
+    int partition_index = start;  // set partition index as start initially
 
     for (int i = start; i < end; i++) {
+        // swap if element is lesser than pivot
         if (arr[i] <= pivot) {
             std::swap(arr[i], arr[partition_index]);
             partition_index++;
         }
     }
 
+    // swap pivot with element at partition index
     std::swap(arr[partition_index], arr[end]);
 
     return partition_index;

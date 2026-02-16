@@ -2,23 +2,27 @@
 #include <iostream>
 #include <vector>
 
+// Lomuto partition
 int partition(std::vector<int>& arr, int start, int end) {
     int pivot = arr[end];
     int partition_index = start;  // set partition index as start initially
 
+    // iterate upto but not including the pivot
     for (int i = start; i < end; i++) {
-        // swap if element is lesser than pivot
+        // move elements smaller than pivot to the left partition
         if (arr[i] <= pivot) {
             std::swap(arr[i], arr[partition_index]);
             partition_index++;
         }
     }
 
-    // swap pivot with element at partition index
+    // swap pivot into its correct sorted position
     std::swap(arr[partition_index], arr[end]);
 
     return partition_index;
 }
+
+// TODO: add Hoarse partition
 
 void quick_sort(std::vector<int>& arr, int start, int end) {
     if (start >= end) return;
@@ -29,7 +33,7 @@ void quick_sort(std::vector<int>& arr, int start, int end) {
 }
 
 int main() {
-    std::vector<int> arr = {2, 4, 1, 6, 8, 5, 3, 7};
+    std::vector<int> arr = {7, 2, 1, 6, 8, 5, 3, 4};
     quick_sort(arr, 0, arr.size() - 1);
 
     for (int x : arr) std::cout << x << " ";

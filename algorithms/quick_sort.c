@@ -21,7 +21,7 @@ int partition(int* arr, int start, int end) {
         }
     }
 
-    // swap pivot into its right position
+    // swap pivot into its correct sorted position
     swap(&arr[end], &arr[partition_index]);
 
     return partition_index;
